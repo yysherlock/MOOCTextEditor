@@ -5,6 +5,7 @@ package spelling;
 
 import static org.junit.Assert.*;
 
+import java.awt.print.Printable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,8 +35,11 @@ public class AutoCompleteDictionaryTrieTester {
 		largeDict = new AutoCompleteDictionaryTrie();
 
 		smallDict.addWord("Hello");
+		//System.out.println(smallDict.size());
 		smallDict.addWord("HElLo");
+		//System.out.println(smallDict.size());
 		smallDict.addWord("help");
+		//System.out.println(smallDict.size());
 		smallDict.addWord("he");
 		smallDict.addWord("hem");
 		smallDict.addWord("hot");
@@ -140,6 +144,7 @@ public class AutoCompleteDictionaryTrieTester {
 		assertEquals(4, completions.size());
 		assertTrue(completions.contains("a"));
 		assertTrue(completions.contains("he"));
+		System.out.println(completions);
 		boolean twoOfThree = completions.contains("hey") && completions.contains("hot") ||
 				             completions.contains("hey") && completions.contains("hem") ||
 				             completions.contains("hot") && completions.contains("hem");
@@ -148,6 +153,9 @@ public class AutoCompleteDictionaryTrieTester {
 		completions = smallDict.predictCompletions("he", 2);
 		boolean allIn = completions.contains("he") && 
 				(completions.contains("hem") || completions.contains("hey"));
+		System.out.println(completions.size());
+		System.out.println(completions);
+		smallDict.printTree();
 		assertEquals(2, completions.size());
 		assertTrue(allIn);
 		
